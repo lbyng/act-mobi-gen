@@ -1,39 +1,23 @@
 import pathlib
+import os
 
 ### Task parameters
-DATA_DIR = '<put your data dir here>'
-SIM_TASK_CONFIGS = {
-    'sim_transfer_cube_scripted':{
-        'dataset_dir': DATA_DIR + '/sim_transfer_cube_scripted',
-        'num_episodes': 50,
-        'episode_len': 400,
-        'camera_names': ['top']
-    },
-
-    'sim_transfer_cube_human':{
-        'dataset_dir': DATA_DIR + '/sim_transfer_cube_human',
-        'num_episodes': 50,
-        'episode_len': 400,
-        'camera_names': ['top']
-    },
-
-    'sim_insertion_scripted': {
-        'dataset_dir': DATA_DIR + '/sim_insertion_scripted',
-        'num_episodes': 50,
-        'episode_len': 400,
-        'camera_names': ['top']
-    },
-
-    'sim_insertion_human': {
-        'dataset_dir': DATA_DIR + '/sim_insertion_human',
-        'num_episodes': 50,
-        'episode_len': 500,
-        'camera_names': ['top']
-    },
+D1_TASK_CONFIGS = {
+    'd1_mobile_manipulation': {
+        'dataset_dir': '/mmfs1/gscratch/krishna/lbyng/act-plus-plus/data/move_grasp/',
+        'num_episodes': None,
+        'episode_len': 1000,
+        'camera_names': ['front_image', 'wrist_image'],
+        'stats_dir': None,
+        'sample_weights': None,
+        'train_ratio': 0.9,
+        'name_filter': lambda n: True,
+    }
 }
 
 ### Simulation envs fixed constants
 DT = 0.02
+FPS = 50
 JOINT_NAMES = ["waist", "shoulder", "elbow", "forearm_roll", "wrist_angle", "wrist_rotate"]
 START_ARM_POSE = [0, -0.96, 1.16, 0, -0.3, 0, 0.02239, -0.02239,  0, -0.96, 1.16, 0, -0.3, 0, 0.02239, -0.02239]
 
@@ -46,8 +30,8 @@ PUPPET_GRIPPER_POSITION_OPEN = 0.05800
 PUPPET_GRIPPER_POSITION_CLOSE = 0.01844
 
 # Gripper joint limits (qpos[6])
-MASTER_GRIPPER_JOINT_OPEN = 0.3083
-MASTER_GRIPPER_JOINT_CLOSE = -0.6842
+MASTER_GRIPPER_JOINT_OPEN = -0.8
+MASTER_GRIPPER_JOINT_CLOSE = -1.65
 PUPPET_GRIPPER_JOINT_OPEN = 1.4910
 PUPPET_GRIPPER_JOINT_CLOSE = -0.6213
 
